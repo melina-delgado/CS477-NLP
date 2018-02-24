@@ -1,0 +1,11 @@
+class: "EvalTest"
+success: "CCGParser correctly parses who/whom sentences"
+failure: "CCGParser does not parse who/whom sentences properly"
+
+preamble: """
+sents = ["the chef who can see you will smile", "the chef whom can see you will smile", "the chef whom you can see will smile", "the chef who you can see will smile"]
+
+ans = [test.accept(sent.split(), "../english") for sent in sents]
+"""
+
+test: "ans"

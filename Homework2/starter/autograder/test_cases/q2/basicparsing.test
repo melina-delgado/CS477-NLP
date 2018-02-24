@@ -1,0 +1,11 @@
+class: "EvalTest"
+success: "CCGParser correctly parses sentences"
+failure: "CCGParser does not parse sentences properly"
+
+preamble: """
+sents = ["this is a sentence", "this is sentence", "John will cook and Mary will eat the dough"]
+
+ans = [test.accept(sent.split(), '../english') for sent in sents] + [len(list(test.parse(sents[0].split(), '../english'))) >= 34]
+"""
+
+test: "ans"

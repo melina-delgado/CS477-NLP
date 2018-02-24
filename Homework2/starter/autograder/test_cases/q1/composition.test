@@ -1,0 +1,20 @@
+class: "EvalTest"
+success: "CCGParser correctly performs composition"
+failure: "CCGParser does not perform compositino properly"
+
+preamble: """
+from utils import *
+
+S, NP, N = AtomicCategory("S"), AtomicCategory("NP"), AtomicCategory("N")
+c1 = CombinedCategory(S, "\\", NP)
+c2 = CombinedCategory(c1, "/", NP)
+c3 = CombinedCategory(NP, "/", N)
+c4 = CombinedCategory(NP, "\\", c1)
+c5 = CombinedCategory(N, "\\", NP)
+c6 = CombinedCategory(c1, "\\", NP)
+c7 = CombinedCategory(NP, "\\", N)
+
+ans = [str(parser.CCGParser.composition(c2, c3)), str(parser.CCGParser.composition(c4, c5)), str(parser.CCGParser.composition(c6, c7))]
+"""
+
+test: "ans"

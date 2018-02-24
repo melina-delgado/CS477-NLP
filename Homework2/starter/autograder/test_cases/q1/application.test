@@ -1,0 +1,16 @@
+class: "EvalTest"
+success: "CCGParser correctly performs application"
+failure: "CCGParser does not perform application properly"
+
+preamble: """
+from utils import *
+
+S, NP, N = AtomicCategory("S"), AtomicCategory("NP"), AtomicCategory("N")
+c1 = CombinedCategory(S, "/", NP)
+c2 = CombinedCategory(NP, "\\", N)
+c3 = CombinedCategory(S, "\\", c2)
+
+ans = [str(parser.CCGParser.application(c1, NP)), str(parser.CCGParser.application(c2, c3)), str(parser.CCGParser.application(NP, c3))]
+"""
+
+test: "ans"

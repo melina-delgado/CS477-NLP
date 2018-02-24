@@ -1,0 +1,11 @@
+class: "EvalTest"
+success: "a^nb^nc^n grammar works!"
+failure: "a^nb^nc^n grammar isn't correct"
+
+preamble: """
+sents = ["aaaabbbbcccc", "aaabbbbccccc"]
+
+ans = [test.accept(list(sent), "../abc") for sent in sents]
+"""
+
+test: "ans"

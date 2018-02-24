@@ -1,0 +1,17 @@
+class: "EvalTest"
+success: "CCGParser correctly performs type-raising"
+failure: "CCGParser does not perform type-raising properly"
+
+preamble: """
+from utils import *
+
+S, NP = AtomicCategory("S"), AtomicCategory("NP")
+c1 = CombinedCategory(S, "\\", NP)
+c2 = CombinedCategory(S, "/", NP)
+
+res1, res2, res3 = parser.CCGParser.typeRaising(NP, c1), parser.CCGParser.typeRaising(c2, NP), parser.CCGParser.typeRaising(NP, c2)
+
+ans = ["None" if res is None else (str(res[0]), res[1]) for res in (res1, res2, res3)]
+"""
+
+test: "ans"
